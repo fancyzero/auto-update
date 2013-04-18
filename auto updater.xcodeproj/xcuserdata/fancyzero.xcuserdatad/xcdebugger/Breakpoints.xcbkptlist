@@ -60,7 +60,72 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "387984675.538106"
+         timestampString = "387991585.60285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "387991585.60285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "387991585.60285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
+         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "387991585.60285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "387991585.60285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
+         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "387991585.60285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "43"
@@ -73,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "387984675.538106"
+         timestampString = "387991570.803542"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
          landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,26 +151,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "387972082.087034"
+         timestampString = "387991641.423426"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
-         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
-         landmarkType = "5">
+         startingLineNumber = "28"
+         endingLineNumber = "28">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "387984675.538106"
+         timestampString = "387992028.287278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "file_list::load_from_file( const std::string&amp; filename )"
-         landmarkType = "5">
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "get_file_md5( const std::string&amp; filename )"
+         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

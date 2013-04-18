@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0458AA711720434000D88206 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0458AA6F1720434000D88206 /* md5.cpp */; };
 		04AE2DAF171E8951000C9D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE2DAE171E8951000C9D0F /* QuartzCore.framework */; };
 		04AE2DB1171E8951000C9D0F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE2DB0171E8951000C9D0F /* OpenGLES.framework */; };
 		04AE2DB3171E8951000C9D0F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AE2DB2171E8951000C9D0F /* OpenAL.framework */; };
@@ -227,6 +228,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0458AA6F1720434000D88206 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
+		0458AA701720434000D88206 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		04AE2DAB171E8951000C9D0F /* auto updater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "auto updater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AE2DAE171E8951000C9D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		04AE2DB0171E8951000C9D0F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -728,6 +731,8 @@
 		04AE2DA2171E8951000C9D0F = {
 			isa = PBXGroup;
 			children = (
+				0458AA6F1720434000D88206 /* md5.cpp */,
+				0458AA701720434000D88206 /* md5.h */,
 				04AE30A0171FF79D000C9D0F /* pugiconfig.hpp */,
 				04AE30A1171FF79D000C9D0F /* pugixml.cpp */,
 				04AE30A2171FF79E000C9D0F /* pugixml.hpp */,
@@ -1985,6 +1990,7 @@
 				04AE309A171E8A54000C9D0F /* download_manager.cpp in Sources */,
 				04AE309D171FE5A6000C9D0F /* update_manager.cpp in Sources */,
 				04AE30A3171FF79E000C9D0F /* pugixml.cpp in Sources */,
+				0458AA711720434000D88206 /* md5.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2118,6 +2124,7 @@
 				04AE3097171E8956000C9D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

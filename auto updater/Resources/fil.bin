@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<filelist name="filelist" >
+    <info name="info" >
+    </info>
+    <files name="files" >
+        <file url="11111" localpath="22222" hash="33333" />
+    </files>
+</filelist>
