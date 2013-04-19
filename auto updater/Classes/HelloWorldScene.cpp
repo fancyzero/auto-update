@@ -6,8 +6,30 @@
 using namespace cocos2d;
 using namespace CocosDenshion;
 
+update_manager* update_man = NULL;
 download_manager* download_man = NULL;
 download_job* job = NULL;
+download_manager* get_download_manager();
+
+CCLabelTTF* log_label;
+
+update_manager* get_update_manager()
+{
+    if ( update_man == NULL )
+    {
+        update_man = new update_manager();
+        std::string path;
+        
+        path = CCFileUtils::sharedFileUtils()->fullPathForFilename("filelist.xml");
+        
+        update_man->set_download_manager( get_download_manager() );
+        update_man->set_root_path(CCFileUtils::sharedFileUtils()->getWritablePath());
+        update_man->load_file_list( path );
+        
+    }
+    return update_man;
+}
+
 download_manager* get_download_manager()
 {
     if ( download_man == NULL )
@@ -74,33 +96,23 @@ bool HelloWorld::init()
     this->addChild(pLabel, 1);
 
     // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
+    //CCSprite* pSprite = CCSprite::create("HelloWorld.png");
 
     // position the sprite on the center of the screen
-    pSprite->setPosition( ccp(size.width/2, size.height/2) );
+    //pSprite->setPosition( ccp(size.width/2, size.height/2) );
 
     // add the sprite as a child to this layer
-    this->addChild(pSprite, 0);
+    //this->addChild(pSprite, 0);
     this->scheduleUpdate();
-    
-    download_job::job_desc jd;
-    jd.src_url = "http://www.google.com.hk/images/srpr/logo4w.png";
-    //jd.src_url = "http://files1.changyou.com/taoyuan/patch/typatchv17.19.4.6-17.19.4.7.exe";
-    jd.dest_file = CCFileUtils::sharedFileUtils()->getWritablePath()+"typatchv17.19.4.6-17.19.4.7.exe";
-    job = get_download_manager()->add_job(jd);
-    
-    file_list fl;
-    std::string path;
-    
-    path = CCFileUtils::sharedFileUtils()->fullPathForFilename("filelist.xml");
-    
-    fl.load_from_file( path );
+        
+    file_list fl = get_update_manager()->get_update_list( "" );
+    get_update_manager()->download_files( fl );
     return true;
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
-    get_download_manager()->abort_job( job );
+    get_download_manager()->abort_all();
     //CCDirector::sharedDirector()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -112,8 +124,9 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 
 void HelloWorld::update(float delta)
 {
-    static float curtime = 0;
-    setPosition(ccp(sin(curtime)*50, 0));
-    curtime += delta;
+    //static float curtime = 0;
+    //setPosition(ccp(sin(curtime)*50, 0));
+    //curtime += delta;
+    
     get_download_manager()->update();
 }

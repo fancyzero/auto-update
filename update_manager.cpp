@@ -10,6 +10,7 @@
 #include "pugixml.hpp"
 #include <sys/stat.h>
 #include "md5.h"
+#include "download_manager.h"
 
 std::string get_file_md5( const std::string& filename );
 
@@ -49,8 +50,9 @@ bool file_list::load_from_file( const std::string& filename )
         file_list_item new_item;
         new_item.hash = file.attribute("hash").as_string();
         new_item.local_path = file.attribute("local_path").as_string();
-        new_item.hash = file.attribute("hash").as_string();
+        new_item.src_url = file.attribute("url").as_string();
         new_item.collection = file.attribute("collection").as_string();
+        m_list.push_back( new_item );
     }
     return true;
 }
@@ -97,7 +99,7 @@ std::string get_file_md5( const std::string& filename )
     {
         sprintf(cstr_digest+i*2, "%02x", digest[i]);
     }
-    md5_str=cstr_digest;
+    md5_str = cstr_digest;
     return md5_str;
 }
 
@@ -109,19 +111,53 @@ bool is_identical( const std::string& filename, const std::string& hash )
     stat( file.c_str(), &_stat);
     clock = gmtime(&(_stat.st_mtime));
 */
-    return get_file_md5( filename ) == hash;
+    if( access( filename.c_str(), F_OK ) != -1 )
+    {
+        return get_file_md5( filename ) == hash;
+    }
+    else
+        return false;
+    
+}
+
+bool update_manager::load_file_list( const std::string& filename )
+{
+    return m_file_list.load_from_file( filename );
+}
+
+std::string update_manager::get_full_path( const std::string& local_path )
+{
+    return m_root_path + local_path;
+}
+
+bool update_manager::download_files( const file_list& fl )
+{
+    for( FILE_LIST::const_iterator it = fl.m_list.begin(); it != fl.m_list.end(); ++it )
+    {
+        download_job::job_desc desc;
+        desc.src_url = (*it).src_url;
+        desc.dest_file = get_full_path( (*it).local_path );
+        m_download_manager->add_job( desc );
+    }
+    return true;
 }
 
 file_list update_manager::get_update_list( const std::string& collection )
 {
     file_list list;
+    
     for ( FILE_LIST::const_iterator it = m_file_list.m_list.begin(); it != m_file_list.m_list.end(); ++it )
     {
         if ( collection.empty() || collection == (*it).collection )
         {
-            if ( !is_identical( (*it).local_path, (*it).hash) )
+            if ( !is_identical( get_full_path((*it).local_path), (*it).hash) )
             {
+                DOWNLOAD_LOG( "file: %s has newer version, newer hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
                 list.add_item( *it );
+            }
+            else
+            {
+                DOWNLOAD_LOG( "file: %s is newest version, hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
             }
         }
     }

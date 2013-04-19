@@ -728,7 +728,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04AE2DA2171E8951000C9D0F = {
+		04787C7C172128B3007399F3 /* autoupdate */ = {
 			isa = PBXGroup;
 			children = (
 				0458AA6F1720434000D88206 /* md5.cpp */,
@@ -740,6 +740,14 @@
 				04AE309C171FE5A6000C9D0F /* update_manager.h */,
 				04AE3098171E8A54000C9D0F /* download_manager.cpp */,
 				04AE3099171E8A54000C9D0F /* download_manager.h */,
+			);
+			name = autoupdate;
+			sourceTree = "<group>";
+		};
+		04AE2DA2171E8951000C9D0F = {
+			isa = PBXGroup;
+			children = (
+				04787C7C172128B3007399F3 /* autoupdate */,
 				04AE2DBE171E8951000C9D0F /* auto updater */,
 				04AE2DAD171E8951000C9D0F /* Frameworks */,
 				04AE2DAC171E8951000C9D0F /* Products */,

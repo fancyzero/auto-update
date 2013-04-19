@@ -191,7 +191,7 @@ void download_manager::update()
             execute_job((*it));
             working_job ++;
         }
-        if ( working_job > m_max_simultaneously_jobs )
+        if ( working_job >= m_max_simultaneously_jobs )
             break;
     }
     
@@ -257,6 +257,8 @@ download_job* download_manager::add_job( const download_job::job_desc& job_desc 
 
 void download_manager::abort_job( download_job* job )
 {
+    DOWNLOAD_LOG( "abort job, handle : %d", job->get_url_handle() );
+    curl_multi_remove_handle( m_multi_handle, job->get_url_handle() );
     curl_easy_cleanup( job->get_url_handle() );
     job->abort();
 }

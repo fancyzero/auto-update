@@ -12,6 +12,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+class download_manager;
+
 struct file_list_item
 {
     std::string hash;
@@ -40,8 +43,21 @@ public:
      获取某个 文件集合（collection） 的更新列表
      //如果 collection 为空，则表示包含所有文件
      */
+    bool download_files( const file_list& fl );
     file_list get_update_list( const std::string& collection );
+    std::string get_full_path( const std::string& local_path );
+    bool       load_file_list( const std::string& filename );
+    void set_download_manager( download_manager* man )
+    {
+        m_download_manager = man;
+    }
+    void set_root_path( const std::string& path )
+    {
+        m_root_path = path;
+    }
 protected:
-    file_list m_file_list;
+    download_manager* m_download_manager;
+    std::string m_root_path;
+    file_list   m_file_list;
 };
 #endif /* defined(__auto_updater__updater__) */
