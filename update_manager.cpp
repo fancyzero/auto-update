@@ -76,32 +76,7 @@ update_manager::~update_manager()
     
 }
 
-std::string get_file_md5( const std::string& filename )
-{
-    std::string md5_str = "ffffffffaaaaaaaa";
-    unsigned char digest[MD5_DIGEST_LEN];
-    FILE* pf = fopen( filename.c_str(), "rb" );
-    unsigned char buff[1024];
-    md_context ctx;
-    md5_begin( &ctx );
-    while( !feof(pf) )
-    {
-        size_t readed = fread( buff, 1, 1024, pf);
-        md5_update( &ctx, buff, readed);
-        if ( readed < 1024 )
-            break;
-    }
-    fclose(pf);
-    char cstr_digest[MD5_DIGEST_LEN*2+1];
-    memset(cstr_digest, 0, MD5_DIGEST_LEN*2+1);
-    md5_result( &ctx, digest );
-    for ( int i = 0; i < MD5_DIGEST_LEN; i++ )
-    {
-        sprintf(cstr_digest+i*2, "%02x", digest[i]);
-    }
-    md5_str = cstr_digest;
-    return md5_str;
-}
+
 
 bool is_identical( const std::string& filename, const std::string& hash )
 {
@@ -137,6 +112,7 @@ bool update_manager::download_files( const file_list& fl )
         download_job::job_desc desc;
         desc.src_url = (*it).src_url;
         desc.dest_file = get_full_path( (*it).local_path );
+        desc.hash = (*it).hash;
         m_download_manager->add_job( desc );
     }
     return true;
@@ -152,15 +128,35 @@ file_list update_manager::get_update_list( const std::string& collection )
         {
             if ( !is_identical( get_full_path((*it).local_path), (*it).hash) )
             {
-                DOWNLOAD_LOG( "file: %s has newer version, newer hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
+                DOWNLOAD_LOG( "file: %s has new version, newer hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
                 list.add_item( *it );
             }
             else
             {
-                DOWNLOAD_LOG( "file: %s is newest version, hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
+                DOWNLOAD_LOG( "file: %s is latest version, hash: %s", get_full_path((*it).local_path).c_str(), (*it).hash.c_str() );
             }
         }
     }
     return list;
     
+}
+
+bool update_manager::update_file_collection( const std::string& collection )
+{
+    if ( !is_update_finished() )
+    {
+        DOWNLOAD_LOG("there are unfinished jobs. update aborted.");
+        return false;
+    }
+    m_download_manager->clean_succeeded_job();
+    file_list fl = get_update_list( collection );
+    download_files( fl );
+    return true;
+}
+
+bool update_manager::is_update_finished()
+{
+    int succeeded = m_download_manager->get_succeeded_job_count();
+    int total = m_download_manager->get_job_count();
+    return total == succeeded;
 }

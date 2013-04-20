@@ -55,6 +55,8 @@ public:
     {
         m_root_path = path;
     }
+    bool update_file_collection( const std::string& collection );
+    bool is_update_finished();
 protected:
     download_manager* m_download_manager;
     std::string m_root_path;

@@ -15,6 +15,7 @@
 #include <cocos2d.h>
 #define DOWNLOAD_LOG(format, ...)  cocos2d::CCLog(format, ##__VA_ARGS__)
 #include "curl.h"
+#include "md5.h"
 class download_manager;
 class download_job
 {
@@ -41,11 +42,13 @@ public:
     };
     struct job_desc
     {
+        std::string hash;
         std::string src_url;
         std::string dest_file;
     };
     download_job( const job_desc& desc, download_manager* manager )
-    :m_desc(desc),m_manager(manager),m_pf(NULL)
+    :m_desc(desc),m_manager(manager),m_pf(NULL),m_pf_hash(NULL),m_flush_step_size(1024*100),m_total_written(0)
+    ,m_current_unflushed(0)
     {
         m_stat.state = pending;
         m_stat.result = unknown;
@@ -58,13 +61,31 @@ public:
     CURL*       get_url_handle();
     void        set_succeeded();//set as completed and succeeded;
     void        set_failed();//set as completed and failed;
+    
+    bool        is_succeeded();
+    bool        is_completed();
+    
+    int         get_flush_step_size();
+    int         get_total_written();
+    int         get_current_unflushed();
+    void        add_current_unflushed( int size );
+    void        add_total_written( int size );
+    FILE*       get_file_handle();
 protected:
+    int         prepare_download();
+    ////////////
+    int         m_flush_step_size;
+    int         m_total_written;
+    int         m_current_unflushed;
+    md_context  m_hash_recorder;
+    ////////////
     CURL*       m_url_handle;
     download_manager *m_manager;
     pthread_t   m_thread_id;
     job_desc    m_desc;
     job_stat    m_stat;
     FILE*       m_pf;
+    FILE*       m_pf_hash;
 };
 
 
@@ -75,12 +96,19 @@ public:
     download_manager();
     ~download_manager();
     void update();
-    void execute_job( download_job* job );
-    download_job* add_job( const download_job::job_desc& job_desc );
+        download_job* add_job( const download_job::job_desc& job_desc );
     void abort_job( download_job* job );
     void abort_all();
     CURLM* get_multi_handle();
+
+    int get_succeeded_job_count();
+    int get_job_count();
+    void clean_succeeded_job();
+    
+protected:
+    void execute_job( download_job* job );
     download_job* get_job_by_handle( CURL* handle );
+    
 protected:
     CURLM*        m_multi_handle;
     int           m_max_simultaneously_jobs;

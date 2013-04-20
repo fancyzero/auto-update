@@ -32,6 +32,9 @@ update_manager* get_update_manager()
 
 download_manager* get_download_manager()
 {
+    curl_version_info_data *v = curl_version_info(CURLVERSION_NOW);
+    
+    
     if ( download_man == NULL )
         download_man = new download_manager();
     return download_man;
@@ -127,6 +130,6 @@ void HelloWorld::update(float delta)
     static float curtime = 0;
     setPosition(ccp(sin(curtime)*50, 0));
     curtime += delta;
-    CCLOG("tick");
+    
     get_download_manager()->update();
 }

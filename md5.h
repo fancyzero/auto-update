@@ -19,7 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, visit the http://fsf.org website.
  */
-
+#include <string>
+#ifndef MD5_H
+#define MD5_H
 #undef CAREFUL_ALIGNMENT
 
 /** We know that the x86 can handle misalignment and has the same
@@ -77,3 +79,7 @@ void md5_result(md_context *ctx, uint8_t digest[MD5_DIGEST_LEN]);
 
 void get_md5(uint8_t digest[MD5_DIGEST_LEN], const uint8_t *input, int n);
 
+void string_to_md5( const std::string& md5_str, uint8_t digest[MD5_DIGEST_LEN] );
+std::string md5_to_string( uint8_t digest[MD5_DIGEST_LEN] );
+std::string get_file_md5( const std::string& filename );
+#endif

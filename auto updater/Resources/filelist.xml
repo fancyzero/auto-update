@@ -3,10 +3,7 @@
     <info name="info" >
     </info>
     <files name="files" >
-        <file url="http://172.17.28.55/test.txt" local_path="test.txt" hash="4c795c0bbe7a2b3aac903f62118e7268" collection="default" />
-        <file url="http://172.17.28.55/test2.txt" local_path="test2.txt" hash="4c795c0bbe7a2b3aac903f62118e7268" collection="default" />
-        <file url="http://172.17.28.55/test3.txt" local_path="test3.txt" hash="4c795c0bbe7a2b3aac903f62118e7268" collection="default" />
-        <file url="http://files1.changyou.com/taoyuan/patch/typatchv17.22.4.3-17.22.4.4.exe" local_path="test4.txt" hash="4e5cbb8dde0e402678faa894f8f9a186" collection="default" />
+               <file url="http://files1.changyou.com/taoyuan/patch/typatchv17.22.4.3-17.22.4.4.exe" local_path="test4.txt" hash="9200eb3715305a778e016469c8fb000c" collection="default" />
         
     </files>
 </filelist>

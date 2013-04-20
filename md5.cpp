@@ -19,9 +19,11 @@
 
 
 #include <inttypes.h>
-#include <string.h>
+//#include <string.h>
 
 #include "md5.h"
+#include <string>
+#include <stdio.h>
 
 void md5_begin(md_context *ctx)
 {
@@ -211,6 +213,28 @@ void md5_result(md_context *ctx, uint8_t digest[MD5_DIGEST_LEN])
 	SIVAL(digest, 12, ctx->D);
 }
 
+void string_to_md5( const std::string& md5_str, uint8_t digest[MD5_DIGEST_LEN] )
+{
+    for( int i = 0; i < md5_str.size()/2 && i < MD5_DIGEST_LEN; i++ )
+    {
+        uint8_t bt = 0;
+        for ( int pass = 0; pass < 2; pass++)
+        {
+            char c = md5_str[i*2+pass];
+            if ( c >= 'a' &&  c <='z')
+                bt |= c -'a'+10;
+            if ( c >= 'A' &&  c <='Z')
+                bt |= c -'Z'+10;
+            if ( c >= '0' &&  c <='9')
+                bt |= c -'0';
+            if ( pass == 0 )
+                bt = bt << 4;
+        }
+        digest[i] = bt;
+
+    }
+}
+
 void get_md5(uint8_t *out, const uint8_t *input, int n)
 {
 	md_context ctx;
@@ -218,94 +242,37 @@ void get_md5(uint8_t *out, const uint8_t *input, int n)
 	md5_update(&ctx, input, n);
 	md5_result(&ctx, out);
 }
-
-#ifdef TEST_MD5
-
-#include <stdlib.h>
-#include <stdio.h>
-
-/**
- * those are the standard RFC 1321 test vectors
- */
-
-static struct {
-    char *str, *md5;
-} tests[] = {
-    { "",
-        "d41d8cd98f00b204e9800998ecf8427e" },
-    { "a",
-        "0cc175b9c0f1b6a831c399e269772661" },
-    { "abc",
-        "900150983cd24fb0d6963f7d28e17f72" },
-    { "message digest",
-        "f96b697d7cb7938d525a2f31aaf161d0" },
-    { "abcdefghijklmnopqrstuvwxyz",
-        "c3fcd3d76192e4007dfb496cca67e13b" },
-    { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-        "d174ab98d277d9f5a5611c2c9f419d9f" },
-    { "12345678901234567890123456789012345678901234567890123456789012345678901234567890",
-        "57edf4a22be3c955ac49da2e2107b67a" },
-    { NULL, NULL }
-};
-
-int main(int argc, char *argv[])
+std::string md5_to_string( uint8_t digest[MD5_DIGEST_LEN] )
 {
-	FILE *f;
-	int i, j;
-	char output[33];
-	md_context ctx;
-	uint8_t buf[1000];
-	uint8_t md5sum[MD5_DIGEST_LEN];
-    
-	if (argc < 2) {
-		printf("\nMD5 Validation Tests:\n\n");
-        
-		for (i = 0; tests[i].str; i++) {
-			char *str = tests[i].str;
-			char *chk = tests[i].md5;
-            
-			printf("  Test %d ", i + 1);
-            
-			get_md5(md5sum, str, strlen(str));
-            
-			for (j = 0; j < MD5_DIGEST_LEN; j++)
-				sprintf(output + j * 2, "%02x", md5sum[j]);
-            
-			if (memcmp(output, chk, 32)) {
-				printf("failed!\n");
-				return 1;
-			}
-            
-			printf("passed.\n");
-		}
-        
-		printf("\n");
-		return 0;
-	}
-    
-	while (--argc) {
-		if (!(f = fopen(*++argv, "rb"))) {
-			perror("fopen");
-			return 1;
-		}
-        
-		md5_begin(&ctx);
-        
-		while ((i = fread(buf, 1, sizeof buf, f)) > 0)
-			md5_update(&ctx, buf, i);
-        
-		fclose(f);
-        
-		md5_result(&ctx, md5sum);
-        
-		for (j = 0; j < MD5_DIGEST_LEN; j++)
-			printf("%02x", md5sum[j]);
-        
-		printf("  %s\n", *argv);
-	}
-    
-	return 0;
+    char cstr_digest[MD5_DIGEST_LEN*2+1];
+    memset(cstr_digest, 0, MD5_DIGEST_LEN*2+1);
+    for ( int i = 0; i < MD5_DIGEST_LEN; i++ )
+    {
+        sprintf(cstr_digest+i*2, "%02x", digest[i]);
+    }
+    return cstr_digest;
 }
 
-#endif
+std::string get_file_md5( const std::string& filename )
+{
+
+    unsigned char digest[MD5_DIGEST_LEN];
+    FILE* pf = fopen( filename.c_str(), "rb" );
+    unsigned char buff[1024];
+    md_context ctx;
+    md5_begin( &ctx );
+    while( !feof(pf) )
+    {
+        size_t readed = fread( buff, 1, 1024, pf);
+        md5_update( &ctx, buff, readed);
+        if ( readed < 1024 )
+            break;
+    }
+    fclose(pf);
+    
+    md5_result( &ctx, digest );
+
+    return md5_to_string(digest);
+}
+
 

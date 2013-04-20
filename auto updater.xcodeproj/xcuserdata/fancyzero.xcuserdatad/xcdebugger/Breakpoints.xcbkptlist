@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "HelloWorld::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
+         startingLineNumber = "134"
+         endingLineNumber = "134"
          landmarkName = "HelloWorld::update(float delta)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "108"
-         endingLineNumber = "108"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "HelloWorld::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -148,25 +148,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "update_manager.cpp"
-         timestampString = "388035164.024154"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
-         landmarkName = "get_file_md5( const std::string&amp; filename )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "108"
-         endingLineNumber = "108"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "HelloWorld::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -175,11 +162,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "388035164.024154"
+         timestampString = "388152746.00638"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
          landmarkName = "update_manager::get_update_list( const std::string&amp; collection )"
          landmarkType = "5">
       </FileBreakpoint>
@@ -188,11 +175,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "388035164.024154"
+         timestampString = "388152746.00638"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
          landmarkName = "update_manager::get_update_list( const std::string&amp; collection )"
          landmarkType = "5">
       </FileBreakpoint>
@@ -201,11 +188,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
          landmarkName = "HelloWorld::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -214,11 +201,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "388035737.190749"
+         timestampString = "388152746.00638"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "update_manager::download_files( const file_list&amp; fl )"
          landmarkType = "5">
       </FileBreakpoint>
@@ -227,11 +214,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/download_manager.cpp"
-         timestampString = "388119758.75495"
+         timestampString = "388158541.515966"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "229"
-         endingLineNumber = "229"
+         startingLineNumber = "445"
+         endingLineNumber = "445"
          landmarkName = "download_manager::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -240,11 +227,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388049481.803579"
+         timestampString = "388122857.335941"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
          landmarkName = "HelloWorld::update(float delta)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -253,11 +240,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/download_manager.cpp"
-         timestampString = "388119960.822962"
+         timestampString = "388158541.515966"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "286"
-         endingLineNumber = "286"
+         startingLineNumber = "503"
+         endingLineNumber = "503"
          landmarkName = "download_manager::abort_all()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -266,11 +253,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
-         timestampString = "388050472.55056"
+         timestampString = "388152331.2334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
          landmarkName = "is_identical( const std::string&amp; filename, const std::string&amp; hash )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -279,11 +266,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/download_manager.cpp"
-         timestampString = "388119758.75495"
+         timestampString = "388158541.515966"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
+         startingLineNumber = "406"
+         endingLineNumber = "406"
          landmarkName = "download_manager::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -292,12 +279,259 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "auto updater/Classes/download_manager.cpp"
-         timestampString = "388120291.329278"
+         timestampString = "388158541.515966"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "219"
-         endingLineNumber = "219"
+         startingLineNumber = "435"
+         endingLineNumber = "435"
          landmarkName = "download_manager::update()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/HelloWorldScene.cpp"
+         timestampString = "388122824.471102"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
+         landmarkName = "get_download_manager()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "update_manager.cpp"
+         timestampString = "388152746.00638"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
+         landmarkName = "update_manager::get_update_list( const std::string&amp; collection )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "200"
+         endingLineNumber = "200"
+         landmarkName = "download_job::prepare_download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388158541.515966"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "469"
+         endingLineNumber = "469"
+         landmarkName = "download_manager::add_job( const download_job::job_desc&amp; job_desc )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "md5.cpp"
+         timestampString = "388152856.497336"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
+         landmarkName = "string_to_md5( const std::string&amp; md5_str, uint8_t digest[MD5_DIGEST_LEN] )"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "253"
+         endingLineNumber = "253"
+         landmarkName = "download_job::download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
+         landmarkName = "download_job::download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
+         landmarkName = "download_job::prepare_download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "232"
+         endingLineNumber = "232"
+         landmarkName = "download_job::prepare_download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156363.689701"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "229"
+         endingLineNumber = "229"
+         landmarkName = "download_job::prepare_download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388158541.515966"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "261"
+         endingLineNumber = "261"
+         landmarkName = "download_job::download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388158541.515966"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "393"
+         endingLineNumber = "393"
+         landmarkName = "download_manager::update()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388155129.891276"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "60"
+         endingLineNumber = "60"
+         landmarkName = "download_job::add_current_unflushed( int size )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388154949.647603"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "22"
+         endingLineNumber = "22"
+         landmarkName = "download_job_write_function(void *ptr, size_t size, size_t nmemb, void *userdata)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388155129.891276"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "download_job::add_current_unflushed( int size )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.h"
+         timestampString = "388155192.934283"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "download_job( const job_desc&amp; desc, download_manager* manager )"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388155270.20118"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "download_job_write_function(void *ptr, size_t size, size_t nmemb, void *userdata)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388156569.616379"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
+         landmarkName = "download_job::download()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "auto updater/Classes/download_manager.cpp"
+         timestampString = "388159744.093154"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
+         landmarkName = "download_job::download()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
