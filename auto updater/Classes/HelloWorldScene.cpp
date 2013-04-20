@@ -124,9 +124,9 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 
 void HelloWorld::update(float delta)
 {
-    //static float curtime = 0;
-    //setPosition(ccp(sin(curtime)*50, 0));
-    //curtime += delta;
-    
+    static float curtime = 0;
+    setPosition(ccp(sin(curtime)*50, 0));
+    curtime += delta;
+    CCLOG("tick");
     get_download_manager()->update();
 }

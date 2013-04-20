@@ -164,7 +164,7 @@ download_job* download_manager::get_job_by_handle( CURL* handle )
         if ( (*it)->get_url_handle() == handle )
             return (*it);
     }
-    return *it;
+    return NULL;
 }
 
 void download_manager::execute_job( download_job* job )
@@ -204,7 +204,7 @@ void download_manager::update()
         if ( running_handle_count > 0)
         {
             timeval tv;
-            tv.tv_sec = 1;
+            tv.tv_sec = 0;
             tv.tv_usec = 0;
             
             int max_fd;
