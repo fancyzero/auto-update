@@ -30,11 +30,10 @@ update_manager* get_update_manager()
     return update_man;
 }
 
+
+
 download_manager* get_download_manager()
 {
-    curl_version_info_data *v = curl_version_info(CURLVERSION_NOW);
-    
-    
     if ( download_man == NULL )
         download_man = new download_manager();
     return download_man;
@@ -87,16 +86,16 @@ bool HelloWorld::init()
 
     // add a label shows "Hello World"
     // create and initialize a label
-    CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Thonburi", 34);
+    log_label = CCLabelTTF::create("Hello World", "Thonburi", 14);
 
     // ask director the window size
     CCSize size = CCDirector::sharedDirector()->getWinSize();
 
     // position the label on the center of the screen
-    pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
+    log_label->setPosition( ccp(size.width / 2, size.height /2 ) );
 
     // add the label as a child to this layer
-    this->addChild(pLabel, 1);
+    this->addChild(log_label, 1);
 
     // add "HelloWorld" splash screen"
     //CCSprite* pSprite = CCSprite::create("HelloWorld.png");
@@ -130,6 +129,9 @@ void HelloWorld::update(float delta)
     static float curtime = 0;
     setPosition(ccp(sin(curtime)*50, 0));
     curtime += delta;
+ 
+    download_manager::download_status st = get_download_manager()->get_status();
+    log_label->setString( st.current_file.c_str() );
     
     get_download_manager()->update();
 }

@@ -11,6 +11,24 @@
 #include  "md5.h"
 #include <sys/stat.h>
 
+
+void create_path( const char* path )
+{
+    std::string pp = path;
+    std::string curp;
+    std::string::size_type cur = pp.find( "/", 0, 1 );
+
+    while ( cur != std::string::npos )
+    {
+        curp = pp.substr( 0, cur+1 );
+        struct stat _stat;
+        if ( stat( curp.c_str(), &_stat) != 0 )
+        {
+            mkdir( curp.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH );
+        }
+        cur = pp.find( "/", cur+1, 1 );
+    }
+}
 /*
  download_job
  */
@@ -28,6 +46,7 @@ static size_t download_job_write_function(void *ptr, size_t size, size_t nmemb, 
 static int download_job_progress(void *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded)
 {
     //DOWNLOAD_LOG( "downloading... %f, %f", nowDownloaded, totalToDownload );
+    //download_job* job = (download_job*)ptr;
     return 0;
 }
 
@@ -40,9 +59,16 @@ static void* download_execute_thread_func(void* job)
     return NULL;
 }
 
-download_job::job_stat download_job::get_job_stat()
+download_job::job_desc download_job::get_desc() const
 {
-    return m_stat;
+    return m_desc;
+}
+
+download_job::job_stat download_job::get_stat() const
+{
+    download_job::job_stat cur_stat = m_stat;
+    cur_stat.total = this->m_total_written;
+    return cur_stat;
 }
 
 CURL* download_job::get_url_handle()
@@ -96,6 +122,7 @@ void download_job::set_succeeded()
 {
     m_stat.result = succeeded;
     m_stat.state = completed;
+    remove( (m_desc.dest_file + ".hash").c_str() );
     cleanup();
 }
 
@@ -236,6 +263,7 @@ cleanup:
 
 bool download_job::download()
 {
+    create_path( m_desc.dest_file.c_str() );
     m_current_unflushed = 0;
     m_total_written = 0;
     int download_start = prepare_download() - this->m_flush_step_size;
@@ -396,8 +424,7 @@ void download_manager::update()
     {
         if ( (*it) == NULL )
             continue;
-        download_job::job_stat js = (*it)->get_job_stat();
-        
+        download_job::job_stat js = (*it)->get_stat();
         if ( js.state == download_job::working )
         {
             working_job ++;
@@ -491,3 +518,44 @@ void download_manager::abort_all()
         abort_job( *it );
     }
 }
+
+download_manager::download_status download_manager::get_status()
+{
+    download_status ret;
+
+    DOWNLOAD_JOBS::const_iterator it;
+    int working_job = 0;
+    for ( it  = m_download_jobs.begin(); it != m_download_jobs.end(); ++it )
+    {
+        if ( (*it) == NULL )
+            continue;
+        ret.total_files ++;
+        download_job::job_stat js = (*it)->get_stat();
+        
+        if ( js.state == download_job::working )
+        {
+            ret.current_file +=  (*it)->get_desc().dest_file;
+            char total_sttr[100];
+            sprintf( total_sttr, "\n : %d", js.total);
+            ret.current_file += total_sttr;
+            ret.current_file +=  "\n";
+            
+        }
+        if ( js.state == download_job::completed )
+        {
+            ret.completed_files ++;
+            if ( js.result == download_job::succeeded )
+                ret.succeeded_files ++;
+            else
+                ret.failed_files ++;
+        }
+        if ( working_job >= m_max_simultaneously_jobs )
+            break;
+    }
+    return ret;
+}
+
+
+
+
+

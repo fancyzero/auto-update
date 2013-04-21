@@ -16,6 +16,8 @@
 #define DOWNLOAD_LOG(format, ...)  cocos2d::CCLog(format, ##__VA_ARGS__)
 #include "curl.h"
 #include "md5.h"
+
+void create_path( const char* path );
 class download_manager;
 class download_job
 {
@@ -53,7 +55,8 @@ public:
         m_stat.state = pending;
         m_stat.result = unknown;
     }
-    job_stat    get_job_stat();
+    job_stat    get_stat() const;
+    job_desc    get_desc() const;
     bool        execute();
     bool        download();
     void        cleanup();
@@ -90,11 +93,27 @@ protected:
 
 
 typedef std::vector<download_job*> DOWNLOAD_JOBS;
+
 class download_manager
 {
 public:
+    struct download_status
+    {
+        download_status()
+        :total_files(0),completed_files(0),succeeded_files(0),failed_files(0)
+        {
+        }
+        std::string current_file;
+        int total_files;
+        int completed_files;
+        int succeeded_files;
+        int failed_files;
+    };
+    
+    
     download_manager();
     ~download_manager();
+    
     void update();
         download_job* add_job( const download_job::job_desc& job_desc );
     void abort_job( download_job* job );
@@ -104,7 +123,7 @@ public:
     int get_succeeded_job_count();
     int get_job_count();
     void clean_succeeded_job();
-    
+    download_status get_status();
 protected:
     void execute_job( download_job* job );
     download_job* get_job_by_handle( CURL* handle );

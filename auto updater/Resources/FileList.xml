@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<filelist name="filelist" >
+    <info name="info" >
+    </info>
+    <files name="files" >
+               <file url="http://files1.changyou.com/taoyuan/patch/typatchv17.22.4.3-17.22.4.4.exe" local_path="/files/test4.txt" hash="9200eb3715305a778e016469c8fb000c" collection="default" />
+        
+    </files>
+</filelist>
