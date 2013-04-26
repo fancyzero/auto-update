@@ -160,3 +160,19 @@ bool update_manager::is_update_finished()
     int total = m_download_manager->get_job_count();
     return total == succeeded;
 }
+
+bool update_manager::update_file_list( const std::string& url, const std::string& local_file, const std::string& hash )
+{
+    if ( m_download_manager == NULL )
+        return false;
+    m_download_manager->abort_all();
+    m_download_manager->clean_all_job();
+    download_job::job_desc desc;
+    desc.dest_file = local_file;
+    desc.src_url = url;
+    desc.hash = hash;
+    m_download_manager->add_job( desc );
+    return false;
+}
+
+

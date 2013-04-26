@@ -10,9 +10,9 @@
 #include "curl.h"
 #include  "md5.h"
 #include <sys/stat.h>
+#include "support/zip_support/unzip.h"
 
-
-void create_path( const char* path )
+bool create_path( const char* path )
 {
     std::string pp = path;
     std::string curp;
@@ -28,6 +28,7 @@ void create_path( const char* path )
         }
         cur = pp.find( "/", cur+1, 1 );
     }
+    return true;
 }
 /*
  download_job
@@ -411,6 +412,19 @@ void download_manager::clean_succeeded_job()
     
 }
 
+void download_manager::clean_all_job()
+{
+    DOWNLOAD_JOBS unsucceeded_jobs;
+    DOWNLOAD_JOBS::const_iterator it;
+    for ( it  = m_download_jobs.begin(); it != m_download_jobs.end(); ++it )
+    {
+            delete *it;
+    }
+    m_download_jobs.clear();
+    
+}
+
+
 void download_manager::execute_job( download_job* job )
 {
     job->execute();
@@ -555,7 +569,132 @@ download_manager::download_status download_manager::get_status()
     return ret;
 }
 
+#define BUFFER_SIZE 1024
+#define MAX_FILENAME 512
 
+bool download_manager::uncompress_file( const std::string& filename )
+{
+    // Open the zip file
+    std::string outFileName = filename;
+    unzFile zipfile = cocos2d::unzOpen(outFileName.c_str());
+    if (! zipfile)
+    {
+        CCLOG("can not open downloaded zip file %s", outFileName.c_str());
+        return false;
+    }
+    
+    // Get info about the zip file
+    cocos2d::unz_global_info global_info;
+    if (unzGetGlobalInfo(zipfile, &global_info) != UNZ_OK)
+    {
+        CCLOG("can not read file global info of %s", outFileName.c_str());
+        cocos2d::unzClose(zipfile);
+    }
+    
+    // Buffer to hold data read from the zip file
+    char readBuffer[BUFFER_SIZE];
+    
+    CCLOG("start uncompressing");
+    
+    // Loop to extract all files.
+    uLong i;
+    for (i = 0; i < global_info.number_entry; ++i)
+    {
+        // Get info about current file.
+        cocos2d::unz_file_info fileInfo;
+        char fileName[MAX_FILENAME];
+        if (unzGetCurrentFileInfo(zipfile,
+                                  &fileInfo,
+                                  fileName,
+                                  MAX_FILENAME,
+                                  NULL,
+                                  0,
+                                  NULL,
+                                  0) != UNZ_OK)
+        {
+            CCLOG("can not read file info");
+            cocos2d::unzClose(zipfile);
+            return false;
+        }
+        
+        // TODO get correct filename
+        std::string fullPath = filename;
+        
+        // Check if this entry is a directory or a file.
+        const size_t filenameLength = strlen(fileName);
+        if (fileName[filenameLength-1] == '/')
+        {
+            // Entry is a direcotry, so create it.
+            // If the directory exists, it will failed scilently.
+            if (!create_path( fullPath.c_str() ) )
+            {
+                CCLOG("can not create directory %s", fullPath.c_str());
+                cocos2d::unzClose(zipfile);
+                return false;
+            }
+        }
+        else
+        {
+            // Entry is a file, so extract it.
+            
+            // Open current file.
+            if (cocos2d::unzOpenCurrentFile(zipfile) != UNZ_OK)
+            {
+                CCLOG("can not open file %s", fileName);
+                cocos2d::unzClose(zipfile);
+                return false;
+            }
+            
+            // Create a file to store current file.
+            FILE *out = fopen(fullPath.c_str(), "wb");
+            if (! out)
+            {
+                CCLOG("can not open destination file %s", fullPath.c_str());
+                cocos2d::unzCloseCurrentFile(zipfile);
+                cocos2d::unzClose(zipfile);
+                return false;
+            }
+            
+            // Write current file content to destinate file.
+            int error = UNZ_OK;
+            do
+            {
+                error = cocos2d::unzReadCurrentFile(zipfile, readBuffer, BUFFER_SIZE);
+                if (error < 0)
+                {
+                    CCLOG("can not read zip file %s, error code is %d", fileName, error);
+                    cocos2d::unzCloseCurrentFile(zipfile);
+                    cocos2d::unzClose(zipfile);
+                    return false;
+                }
+                
+                if (error > 0)
+                {
+                    fwrite(readBuffer, error, 1, out);
+                }
+            } while(error > 0);
+            
+            fclose(out);
+        }
+        
+        cocos2d::unzCloseCurrentFile(zipfile);
+        
+        // Goto next entry listed in the zip file.
+        if ((i+1) < global_info.number_entry)
+        {
+            if (cocos2d::unzGoToNextFile(zipfile) != UNZ_OK)
+            {
+                CCLOG("can not read next file");
+                cocos2d::unzClose(zipfile);
+                return false;
+            }
+        }
+    }
+    
+    CCLOG("end uncompressing");
+    
+    return true;
+}
 
 
 

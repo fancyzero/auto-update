@@ -11,6 +11,14 @@ download_manager* download_man = NULL;
 download_job* job = NULL;
 download_manager* get_download_manager();
 
+enum update_state
+{
+    download_file_list,
+    download_files,
+};
+
+update_state g_updatestate = download_file_list;
+
 CCLabelTTF* log_label;
 
 update_manager* get_update_manager()
@@ -106,9 +114,10 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     //this->addChild(pSprite, 0);
     this->scheduleUpdate();
-        
-    file_list fl = get_update_manager()->get_update_list( "" );
-    get_update_manager()->download_files( fl );
+    
+    
+    g_updatestate = download_file_list;
+    get_update_manager()->update_file_list("http://updateserver/filelist.xml", "filelist.xml", "hahahahaha");
     return true;
 }
 
@@ -130,6 +139,20 @@ void HelloWorld::update(float delta)
     setPosition(ccp(sin(curtime)*50, 0));
     curtime += delta;
  
+    switch ( g_updatestate )
+    {
+        case download_file_list:
+            if ( get_update_manager()->is_update_finished() )
+            {
+                g_updatestate = download_files;
+                file_list fl = get_update_manager()->get_update_list( "" );
+                get_update_manager()->download_files( fl );
+            }
+            break;
+        case download_files:
+            //do nothing
+            break;
+    }
     download_manager::download_status st = get_download_manager()->get_status();
     log_label->setString( st.current_file.c_str() );
     

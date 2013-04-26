@@ -57,6 +57,7 @@ public:
     }
     bool update_file_collection( const std::string& collection );
     bool is_update_finished();
+    bool update_file_list( const std::string& url, const std::string& local_file, const std::string& hash );
 protected:
     download_manager* m_download_manager;
     std::string m_root_path;

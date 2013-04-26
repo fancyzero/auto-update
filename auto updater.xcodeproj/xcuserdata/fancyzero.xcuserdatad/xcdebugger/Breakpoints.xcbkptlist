@@ -33,19 +33,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388211976.819394"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
-         landmarkName = "HelloWorld::init()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
          timestampString = "388035164.024154"
          startingColumnNumber = "9223372036854775807"
@@ -148,19 +135,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388211976.819394"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
-         landmarkName = "HelloWorld::init()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "update_manager.cpp"
          timestampString = "388152746.00638"
          startingColumnNumber = "9223372036854775807"
@@ -181,19 +155,6 @@
          startingLineNumber = "125"
          endingLineNumber = "125"
          landmarkName = "update_manager::get_update_list( const std::string&amp; collection )"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "auto updater/Classes/HelloWorldScene.cpp"
-         timestampString = "388211976.819394"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "111"
-         endingLineNumber = "111"
-         landmarkName = "HelloWorld::init()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

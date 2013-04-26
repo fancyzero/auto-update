@@ -17,7 +17,7 @@
 #include "curl.h"
 #include "md5.h"
 
-void create_path( const char* path );
+bool create_path( const char* path );
 class download_manager;
 class download_job
 {
@@ -123,8 +123,10 @@ public:
     int get_succeeded_job_count();
     int get_job_count();
     void clean_succeeded_job();
+    void clean_all_job();
     download_status get_status();
 protected:
+    bool uncompress_file( const std::string& filename );
     void execute_job( download_job* job );
     download_job* get_job_by_handle( CURL* handle );
     
