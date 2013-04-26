@@ -17,6 +17,12 @@ class download_manager;
 
 struct file_list_item
 {
+    file_list_item()
+    :compressed(false)
+    {
+        
+    }
+    bool        compressed;
     std::string hash;
     std::string local_path;
     std::string src_url;

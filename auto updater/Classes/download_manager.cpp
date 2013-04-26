@@ -12,6 +12,8 @@
 #include <sys/stat.h>
 #include "support/zip_support/unzip.h"
 
+bool uncompress_file( const std::string& filename );
+
 bool create_path( const char* path )
 {
     std::string pp = path;
@@ -119,19 +121,43 @@ void download_job::cleanup()
     m_url_handle = NULL;
 }
 
+void download_job::on_download_completed()
+{
+    cleanup();
+    if ( m_desc.compressed == true )
+    {
+        rename( m_desc.dest_file.c_str(), (m_desc.dest_file + ".compressed").c_str() );
+        if ( uncompress_file( m_desc.dest_file + ".compressed") )
+        {
+            set_succeeded();
+        }
+        else
+        {
+            set_failed();
+        }
+        remove( (m_desc.dest_file + ".compressed").c_str() );
+    }
+    else
+    {
+        set_succeeded();
+    }
+}
+
 void download_job::set_succeeded()
 {
+    cleanup();
     m_stat.result = succeeded;
     m_stat.state = completed;
     remove( (m_desc.dest_file + ".hash").c_str() );
-    cleanup();
+
 }
 
 void download_job::set_failed()
 {
+    cleanup();
     m_stat.result = failed;
     m_stat.state = completed;
-    cleanup();
+
 }
 
 bool download_job::is_succeeded()
@@ -494,7 +520,9 @@ void download_manager::update()
                 DOWNLOAD_LOG("handle %x done", msg->easy_handle );
                 curl_multi_remove_handle( m_multi_handle, msg->easy_handle );
                 if ( msg->data.result == CURLE_OK )
-                    get_job_by_handle( msg->easy_handle )->set_succeeded();
+                {
+                    get_job_by_handle( msg->easy_handle )->on_download_completed();
+                }
                 else
                     get_job_by_handle( msg->easy_handle )->set_failed();
             }
@@ -572,9 +600,11 @@ download_manager::download_status download_manager::get_status()
 #define BUFFER_SIZE 1024
 #define MAX_FILENAME 512
 
-bool download_manager::uncompress_file( const std::string& filename )
+bool uncompress_file( const std::string& filename )
 {
     // Open the zip file
+    std::string outRoot = filename;
+    outRoot = outRoot.substr( 0, outRoot.rfind('/') );
     std::string outFileName = filename;
     unzFile zipfile = cocos2d::unzOpen(outFileName.c_str());
     if (! zipfile)
@@ -618,7 +648,7 @@ bool download_manager::uncompress_file( const std::string& filename )
         }
         
         // TODO get correct filename
-        std::string fullPath = filename;
+        std::string fullPath = outRoot + "/" + fileName;
         
         // Check if this entry is a directory or a file.
         const size_t filenameLength = strlen(fileName);

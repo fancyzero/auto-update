@@ -39,9 +39,9 @@ bool file_list::load_from_file( const std::string& filename )
     pugi::xml_node root = doc.child("filelist");
     if ( root == NULL)
         return false;
-    pugi::xml_node info_node = root.child("info");
+    //pugi::xml_node info_node = root.child("info");
     pugi::xml_node filelist_node = root.child("files");
-    if ( filelist_node == NULL || info_node == NULL )
+    if ( filelist_node == NULL )//|| info_node == NULL )
     {
         return false;
     }
@@ -52,6 +52,7 @@ bool file_list::load_from_file( const std::string& filename )
         new_item.local_path = file.attribute("local_path").as_string();
         new_item.src_url = file.attribute("url").as_string();
         new_item.collection = file.attribute("collection").as_string();
+        new_item.compressed = file.attribute("compressed").as_bool();
         m_list.push_back( new_item );
     }
     return true;
@@ -107,12 +108,14 @@ std::string update_manager::get_full_path( const std::string& local_path )
 
 bool update_manager::download_files( const file_list& fl )
 {
+    m_download_manager->clean_all_job();
     for( FILE_LIST::const_iterator it = fl.m_list.begin(); it != fl.m_list.end(); ++it )
     {
         download_job::job_desc desc;
         desc.src_url = (*it).src_url;
         desc.dest_file = get_full_path( (*it).local_path );
         desc.hash = (*it).hash;
+        desc.compressed = (*it).compressed;
         m_download_manager->add_job( desc );
     }
     return true;
@@ -171,6 +174,7 @@ bool update_manager::update_file_list( const std::string& url, const std::string
     desc.dest_file = local_file;
     desc.src_url = url;
     desc.hash = hash;
+    desc.compressed = false;
     m_download_manager->add_job( desc );
     return false;
 }

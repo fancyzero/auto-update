@@ -44,13 +44,19 @@ public:
     };
     struct job_desc
     {
+        job_desc()
+        :compressed(false)
+        {
+            
+        }
         std::string hash;
         std::string src_url;
         std::string dest_file;
+        bool        compressed;
     };
     download_job( const job_desc& desc, download_manager* manager )
     :m_desc(desc),m_manager(manager),m_pf(NULL),m_pf_hash(NULL),m_flush_step_size(1024*100),m_total_written(0)
-    ,m_current_unflushed(0)
+    ,m_current_unflushed(0),m_url_handle(NULL)
     {
         m_stat.state = pending;
         m_stat.result = unknown;
@@ -67,15 +73,17 @@ public:
     
     bool        is_succeeded();
     bool        is_completed();
-    
+    void        on_download_completed();  
     int         get_flush_step_size();
     int         get_total_written();
     int         get_current_unflushed();
     void        add_current_unflushed( int size );
     void        add_total_written( int size );
     FILE*       get_file_handle();
+
 protected:
     int         prepare_download();
+  
     ////////////
     int         m_flush_step_size;
     int         m_total_written;
@@ -126,7 +134,7 @@ public:
     void clean_all_job();
     download_status get_status();
 protected:
-    bool uncompress_file( const std::string& filename );
+
     void execute_job( download_job* job );
     download_job* get_job_by_handle( CURL* handle );
     

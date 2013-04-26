@@ -15,8 +15,12 @@ enum update_state
 {
     download_file_list,
     download_files,
+    finished_downloading,
 };
-
+std::string get_filelist_path()
+{
+    return cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath() + "filelist.xml";
+}
 update_state g_updatestate = download_file_list;
 
 CCLabelTTF* log_label;
@@ -27,12 +31,10 @@ update_manager* get_update_manager()
     {
         update_man = new update_manager();
         std::string path;
-        
-        path = CCFileUtils::sharedFileUtils()->fullPathForFilename("filelist.xml");
-        
+    
         update_man->set_download_manager( get_download_manager() );
         update_man->set_root_path(CCFileUtils::sharedFileUtils()->getWritablePath());
-        update_man->load_file_list( path );
+    
         
     }
     return update_man;
@@ -117,7 +119,7 @@ bool HelloWorld::init()
     
     
     g_updatestate = download_file_list;
-    get_update_manager()->update_file_list("http://updateserver/filelist.xml", "filelist.xml", "hahahahaha");
+    get_update_manager()->update_file_list("http://192.168.200.65/filelist.xml", cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath() + "filelist.xml", "hahahahaha");
     return true;
 }
 
@@ -131,7 +133,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #endif
 }
 
-
+bool all_done = false;
 
 void HelloWorld::update(float delta)
 {
@@ -145,16 +147,48 @@ void HelloWorld::update(float delta)
             if ( get_update_manager()->is_update_finished() )
             {
                 g_updatestate = download_files;
+                get_update_manager()->load_file_list( get_filelist_path() );
                 file_list fl = get_update_manager()->get_update_list( "" );
                 get_update_manager()->download_files( fl );
             }
             break;
         case download_files:
+            if ( get_update_manager()->is_update_finished() )
+            {
+                if ( get_download_manager()->get_succeeded_job_count() == get_download_manager()->get_job_count() )
+                {
+                    // everything is ok
+                    CCLOG( "total %d jobs", get_download_manager()->get_job_count() );
+                    log_label->setString( "everything is ok." );
+                    g_updatestate = finished_downloading;
+                    all_done = true;
+                }
+                else
+                {
+                    // some files failed
+                    // download again
+                    CCLOG( "total %d jobs, succeeded %d", get_download_manager()->get_job_count(), get_download_manager()->get_succeeded_job_count() );
+                    get_update_manager()->load_file_list( get_filelist_path() );
+                    file_list fl = get_update_manager()->get_update_list( "" );
+                    get_update_manager()->download_files( fl );
+
+                }
+            }
+            break;
+        case finished_downloading:
+        {
+            
             //do nothing
+        }
+
+
             break;
     }
-    download_manager::download_status st = get_download_manager()->get_status();
-    log_label->setString( st.current_file.c_str() );
-    
+    if ( all_done == false )
+    {
+        download_manager::download_status st = get_download_manager()->get_status();
+        log_label->setString( st.current_file.c_str() );
+    }
     get_download_manager()->update();
+        
 }
